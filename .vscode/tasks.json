@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "targetName",
+            "description": "Enter the target name (e.g. tgy, bs_nfet)",
+            "default": "tgy",
+            "type": "promptString"
+        }
+    ],
+    "tasks": [
+        {
+            "label": "Build All",
+            "type": "shell",
+            "command": "make all",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Builds all firmware targets using avra."
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "make clean",
+            "problemMatcher": [],
+            "detail": "Removes all generated .hex and object files."
+        },
+        {
+            "label": "Flash (USBasp)",
+            "type": "shell",
+            "command": "make program_usbasp_${input:targetName}",
+            "problemMatcher": [],
+            "detail": "Flashes the specified target using a USBasp programmer. Prompts for target name."
+        },
+        {
+            "label": "Flash (AVRISP mkII)",
+            "type": "shell",
+            "command": "make program_avrisp2_${input:targetName}",
+            "problemMatcher": [],
+            "detail": "Flashes the specified target using an AVRISP mkII programmer. Prompts for target name."
+        }
+    ]
+}
